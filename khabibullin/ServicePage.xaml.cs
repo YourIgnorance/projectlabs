@@ -53,7 +53,7 @@ namespace khabibullin
             }
             if (ComboType.SelectedIndex == 5)
             {
-                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Discount * 100) >= 70 && Convert.ToInt32(p.Discount * 100) <= 100)).ToList();
+                currentServices = currentServices.Where(p => (Convert.ToInt32(p.Discount * 100) >= 70 && Convert.ToInt32(p.Discount * 100) < 100)).ToList();
             }
             currentServices = currentServices.Where(p => p.Title.ToLower().Contains(TBoxSearch.Text.ToLower())).ToList();
 
