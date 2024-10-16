@@ -33,7 +33,7 @@
             </StackPanel>
         </WrapPanel>
         <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
-            <RadioButton Content="По возрастанию стоимости" GroupName="Sort" Width="300" FontFamily="20" Checked="RadioButton_Checked" Name="RButtonUp"></RadioButton>
+            <RadioButton Content="По возрастанию стоимости" GroupName="Sort" Width="300" FontSize="20" Checked="RadioButton_Checked" Name="RButtonUp"></RadioButton>
             <RadioButton Content="По убыванию стоимости" GroupName="Sort" Width="300" FontSize="20" Checked="RadioButton_Checked_1" Name="RButtonDown"></RadioButton>
         </StackPanel>
 
