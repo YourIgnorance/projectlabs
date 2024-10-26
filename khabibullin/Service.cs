@@ -28,7 +28,22 @@ namespace khabibullin
         public decimal Cost { get; set; }
         public Nullable<double> Discount { get; set; }
         public string Description { get; set; }
-    
+
+        public int DiscountInt
+        {
+            get
+            {
+                if (this.Discount != null)
+                    return Convert.ToInt32(Discount * 100);
+                else
+                    return 0;
+            }
+            set
+            {
+                this.Discount = Convert.ToDouble(value) / 100;
+            }
+        }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClientService> ClientService { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
