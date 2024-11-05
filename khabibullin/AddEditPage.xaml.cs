@@ -37,14 +37,42 @@ namespace khabibullin
                 errors.AppendLine("Укажите название услуги");
             if(_currentService.Cost <= 0)
                 errors.AppendLine("Укажите стоимость услуги");
-            if(_currentService.Discount == null)
+            if (_currentService.DiscountInt > 240 || _currentService.Duration <= 0)
+                errors.AppendLine("Длительность не может быть больше 240 минут или меньше 0");
+            if (_currentService.Discount < 0 || _currentService.Discount > 100)
+                errors.AppendLine("Укажите скидку от 0 до 100");
+            if (_currentService.Discount == 0)
                 errors.AppendLine("Укажите скидку");
-            if(string.IsNullOrWhiteSpace(_currentService.Duration))
-                errors.AppendLine("Укажите длительность услуги");
+
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
                 return;
+            }
+
+            var allService = Khabibullin_autoserviceEntities.GetContext().Service.ToList();
+            allService = allService.Where(p => p.Title == _currentService.Title).ToList();
+
+            if (allService.Count == 0)
+            {
+                if (_currentService.ID == 0)
+                {
+                    Khabibullin_autoserviceEntities.GetContext().Service.Add(_currentService);
+                }
+                try
+                {
+                    Khabibullin_autoserviceEntities.GetContext().SaveChanges();
+                    MessageBox.Show("Информация сохранена");
+                    Manager.MainFrame.GoBack();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Уже существует такая услуга");
             }
 
             if (_currentService.ID == 0)
