@@ -53,16 +53,13 @@ namespace khabibullin
             {
                 errors.AppendLine($"Неверный формат начала услуги");
             }
-            else
-            {
-                string[] start = s.Split(new char[] { ':' });
-                int startHour = Convert.ToInt32(start[0].ToString());
-                int startMin = Convert.ToInt32(start[1].ToString());
+            string[] start = s.Split(new char[] { ':' });
+            int startHour = Convert.ToInt32(start[0].ToString());
+            int startMin = Convert.ToInt32(start[1].ToString());
 
-                if (startHour >= 24 && startMin >= 1)
-                {
-                    errors.AppendLine($"Время начало услуги указано неверно");
-                }
+            if ((startHour >= 24 && startMin >= 1) || startHour > 24 || startMin > 59)
+            {
+                errors.AppendLine($"Время начало услуги указано неверно");
             }
             if (errors.Length > 0)
             {
@@ -106,7 +103,7 @@ namespace khabibullin
                 string[] start = s.Split(new char[] { ':' });
                 int startHour = Convert.ToInt32(start[0].ToString()) * 60;
                 int startMin = Convert.ToInt32(start[1].ToString());
-
+               
                 int sum = startHour + startMin + _currentService.Duration;
 
                 int EndHour = sum / 60;
